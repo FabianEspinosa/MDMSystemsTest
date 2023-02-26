@@ -70,13 +70,43 @@ class CsvController extends Controller
                 'APPOINMENT_DATE' => $data[2],
                 'APPOINMENT_STATUS' => $data[3],
                 'DURATION' => $data[4],
-                'DOCTOR' => $data[5],                
-            ]);          
+                'DOCTOR' => $data[5],
+            ]);
 
             // Guardar el modelo en la base de datos
             $patient->save();
         }
 
         return response()->json(['message' => 'Archivo CSV recibido correctamente.']);
+    }
+
+    public function getAppointments()
+    {
+        // Obtener la lista de pacientes y citas
+        $patients = Patient::all();
+        $appointments = Appointment::all();
+
+        // Crear un arreglo para almacenar los datos a enviar a React
+        $events = [];
+
+        // Iterar sobre las citas para obtener los datos necesarios
+        foreach ($appointments as $appointment) {
+            // Obtener el paciente asociado a la cita
+            $patient = $patients->where('PTNO', $appointment->PTNO)->first();
+
+            // Si se encuentra el paciente, crear un objeto con los datos requeridos
+            if ($patient) {
+                $event = [
+                    'title' => $patient->PATIENT_NAME,
+                    'start' => $appointment->APPOINMENT_DATE,
+                ];
+
+                // Agregar el objeto al arreglo de eventos
+                array_push($events, $event);
+            }
+        }
+
+        // Devolver los eventos como respuesta
+        return response()->json($events);
     }
 }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
 
-export default function Appointments() {
+export default function Appointments() {    
     const [csvData, setCsvData] = useState(null);
     const { setNotification } = useStateContext();
     const inputFileRef = useRef(null);
@@ -24,7 +24,7 @@ export default function Appointments() {
                 .post("/upload-csv-appointments", formData, {})
                 .then(() => {
                     setNotification("Archivo cargado correctamente");
-                    // navigate("/users");
+                    navigate("/dashboard");
                 })
                 .catch((err) => {
                     setNotification(

@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class);    
     Route::post('/upload-csv-patients', [CsvController::class, 'uploadPatients']);
     Route::post('/upload-csv-appointments', [CsvController::class, 'uploadAppointments']);
+    Route::get('/appointmentsData', [CsvController::class, 'getAppointments']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

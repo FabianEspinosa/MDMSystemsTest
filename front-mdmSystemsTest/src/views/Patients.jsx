@@ -24,7 +24,7 @@ export default function Patients() {
                 .post("/upload-csv-patients", formData, {})
                 .then(() => {
                     setNotification("Archivo cargado correctamente");
-                    // navigate("/users");
+                    navigate("/dashboard");
                 })
                 .catch((err) => {
                     setNotification(
