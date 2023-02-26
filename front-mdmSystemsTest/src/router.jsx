@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
+import Appointments from "./views/Appointments";
 import Dashboard from "./views/Dashboard";
 import Login from "./views/Login";
 import NotFound from "./views/NotFound";
+import Patients from "./views/Patients";
 import Signup from "./views/Signup";
 import UserForm from "./views/UserForm";
 import Users from "./views/Users";
@@ -15,11 +17,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Navigate to="/users" />,
+                element: <Navigate to="/dashboard" />,
             },
             {
                 path: "/dashboard",
                 element: <Dashboard />,
+            },
+            {
+                path: "/patients",
+                element: <Patients />,
+            },
+            {
+                path: "/appointments",
+                element: <Appointments />,
             },
             {
                 path: "/users",
@@ -27,11 +37,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/users/new",
-                element: <UserForm key="userCreate"/>,
+                element: <UserForm key="userCreate" />,
             },
             {
                 path: "/users/:id",
-                element: <UserForm key="userUpdate"/>,
+                element: <UserForm key="userUpdate" />,
             },
         ],
     },
